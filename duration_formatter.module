@@ -1,0 +1,113 @@
+<?php
+
+/**
+ * Main file for Duration Formatter module.
+ */
+
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function duration_formatter_field_formatter_info() {
+  return array(
+    'duration' => array(
+      'label' => t('Duration'),
+      'field types' => array('number_integer', 'number_decimal', 'number_float'),
+      // @TODO: Should we provide settings for the date parts?
+      /*'settings' => array(
+        'hours' => TRUE,
+        'minutes' => TRUE,
+        'seconds' => TRUE,
+      ),*/
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function duration_formatter_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  // This gets the view mode where the settings are stored.
+  $display = $instance['display'][$view_mode];
+  // This gets the settings.
+  $settings = $display['settings'];
+
+  $element = array();
+
+  // @TODO: See #16.
+
+  /*$element['hours'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show hours'),
+    '#default_value' => $settings['hours'],
+  );
+
+  $element['minutes'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show minutes'),
+    '#default_value' => $settings['minutes'],
+  );
+
+  $element['seconds'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show seconds'),
+    '#default_value' => $settings['seconds'],
+  );*/
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function duration_formatter_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  // @TODO: See #16.
+  $summary = '';
+
+  return $summary;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function duration_formatter_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  // This is where the output will be.
+  $element = array();
+  // Store the field formatter settings.
+  $settings = $display['settings'];
+
+  foreach ($items as $delta => $item) {
+    // Gettinf field value.
+    $value = $item['value'];
+
+    // Prepeare an array with date parts in it.
+    $time = array();
+    $time['hours'] = floor($value / 3600);
+    $time['mins'] = floor(($value - ($time['hours'] * 3600)) / 60);
+    $time['secs'] = floor(($value - ($time['hours'] * 3600) - ($time['mins'] * 60)));
+
+    // Iterating all time parts.
+    foreach ($time as $part => &$value) {
+      // Appending a zero if value is greater than zero and lower than ten.
+      if ($value > 0 && $value < 10) {
+        $value = 0 . $value;
+      }
+      // If value is zero remove it.
+      elseif ($value == 0) {
+        unset($time[$part]);
+      }
+    }
+
+    // Implode the array and use ':' as seperator.
+    $markup = implode(':', $time);
+
+    $element[$delta] = array(
+      '#markup' => $markup,
+    );
+  }
+
+  return $element;
+}
