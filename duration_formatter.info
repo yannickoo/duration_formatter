@@ -1,3 +1,4 @@
 name = Duration Formatter
 description = Provides a field formatter for durations.
 core = 7.x
+dependencies[] = number
