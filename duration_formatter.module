@@ -36,10 +36,10 @@ function duration_formatter_field_formatter_view($entity_type, $entity, $field, 
     $duration = '';
 
     if ($hours !== 0) {
-      $duration = str_pad($hours, 2, '0', STR_PAD_LEFT). ':';
+      $duration = str_pad($hours, 2, '0', STR_PAD_LEFT) . ':';
     }
 
-    $duration .= str_pad($minutes, 2, '0', STR_PAD_LEFT). ':';
+    $duration .= str_pad($minutes, 2, '0', STR_PAD_LEFT) . ':';
     $duration .= str_pad($seconds, 2, '0', STR_PAD_LEFT);
 
     $element[$delta] = array(
