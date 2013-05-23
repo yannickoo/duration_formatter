@@ -80,32 +80,24 @@ function duration_formatter_field_formatter_view($entity_type, $entity, $field, 
   $settings = $display['settings'];
 
   foreach ($items as $delta => $item) {
-    // Gettinf field value.
+    // Getting field value.
     $value = $item['value'];
 
-    // Prepeare an array with date parts in it.
-    $time = array();
-    $time['hours'] = floor($value / 3600);
-    $time['mins'] = floor(($value - ($time['hours'] * 3600)) / 60);
-    $time['secs'] = floor(($value - ($time['hours'] * 3600) - ($time['mins'] * 60)));
+    $hours = intval(intval($value) / 3600);
+    $minutes = intval(($value / 60) % 60);
+    $seconds = intval($value % 60);
 
-    // Iterating all time parts.
-    foreach ($time as $part => &$value) {
-      // Appending a zero if value is greater than zero and lower than ten.
-      if ($value > 0 && $value < 10) {
-        $value = 0 . $value;
-      }
-      // If value is zero remove it.
-      elseif ($value == 0) {
-        unset($time[$part]);
-      }
+    $duration = '';
+
+    if ($hours !== 0) {
+      $duration = str_pad($hours, 2, '0', STR_PAD_LEFT). ':';
     }
 
-    // Implode the array and use ':' as seperator.
-    $markup = implode(':', $time);
+    $duration .= str_pad($minutes, 2, '0', STR_PAD_LEFT). ':';
+    $duration .= str_pad($seconds, 2, '0', STR_PAD_LEFT);
 
     $element[$delta] = array(
-      '#markup' => $markup,
+      '#markup' => $duration,
     );
   }
 
