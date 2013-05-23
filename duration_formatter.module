@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @file
  * Main file for Duration Formatter module.
  */
 
@@ -13,61 +14,8 @@ function duration_formatter_field_formatter_info() {
     'duration' => array(
       'label' => t('Duration'),
       'field types' => array('number_integer', 'number_decimal', 'number_float'),
-      // @TODO: Should we provide settings for the date parts?
-      /*'settings' => array(
-        'hours' => TRUE,
-        'minutes' => TRUE,
-        'seconds' => TRUE,
-      ),*/
     ),
   );
-}
-
-/**
- * Implements hook_field_formatter_settings_form().
- */
-function duration_formatter_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
-  // This gets the view mode where the settings are stored.
-  $display = $instance['display'][$view_mode];
-  // This gets the settings.
-  $settings = $display['settings'];
-
-  $element = array();
-
-  // @TODO: See #16.
-
-  /*$element['hours'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show hours'),
-    '#default_value' => $settings['hours'],
-  );
-
-  $element['minutes'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show minutes'),
-    '#default_value' => $settings['minutes'],
-  );
-
-  $element['seconds'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Show seconds'),
-    '#default_value' => $settings['seconds'],
-  );*/
-
-  return $element;
-}
-
-/**
- * Implements hook_field_formatter_settings_summary().
- */
-function duration_formatter_field_formatter_settings_summary($field, $instance, $view_mode) {
-  $display = $instance['display'][$view_mode];
-  $settings = $display['settings'];
-
-  // @TODO: See #16.
-  $summary = '';
-
-  return $summary;
 }
 
 /**
