@@ -24,8 +24,6 @@ function duration_formatter_field_formatter_info() {
 function duration_formatter_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   // This is where the output will be.
   $element = array();
-  // Store the field formatter settings.
-  $settings = $display['settings'];
 
   foreach ($items as $delta => $item) {
     // Getting field value.
