@@ -9,7 +9,8 @@ INTRODUCTION
 ------------
 
 Current Maintainers:
-  yannickoo (http://drupal.org/user/531118)
+
+* [yannickoo](http://drupal.org/user/531118)
 
 This simple module provides a field formatter for number fields (integer,
 decimals and floats) which converts seconds into a human-readable format.
