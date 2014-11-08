@@ -1,24 +1,15 @@
-CONTENTS OF THIS FILE
----------------------
-
- * Introduction
- * Installation
-
-
-INTRODUCTION
-------------
+# Introduction
 
 Current Maintainers:
 
-* [yannickoo](http://drupal.org/user/531118)
+* [yannickoo](https://www.drupal.org/u/yannickoo)
 
 This simple module provides a field formatter for number fields (integer,
 decimals and floats) which converts seconds into a human-readable format.
 This is useful when extracting the duration of a song into Drupal and it should
 be displayed as readable time format.
 
-INSTALLATION
-------------
+# Installation
 
 1. Install the module the drupal way [1]
 
