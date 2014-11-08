@@ -11,8 +11,6 @@ be displayed as readable time format.
 
 # Installation
 
-1. Install the module the drupal way [1]
+1. Install the module the [drupal way](http://drupal.org/documentation/install/modules-themes/modules-7)
 
 2. Select "Duration" as field formatter for a number field
-
-[1] http://drupal.org/documentation/install/modules-themes/modules-7
