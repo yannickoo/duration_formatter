@@ -26,26 +26,35 @@ function duration_formatter_field_formatter_view($entity_type, $entity, $field, 
   $element = array();
 
   foreach ($items as $delta => $item) {
-    // Getting field value.
-    $value = $item['value'];
-
-    $hours = intval(intval($value) / 3600);
-    $minutes = intval(($value / 60) % 60);
-    $seconds = intval($value % 60);
-
-    $duration = '';
-
-    if ($hours !== 0) {
-      $duration = str_pad($hours, 2, '0', STR_PAD_LEFT) . ':';
-    }
-
-    $duration .= str_pad($minutes, 2, '0', STR_PAD_LEFT) . ':';
-    $duration .= str_pad($seconds, 2, '0', STR_PAD_LEFT);
-
     $element[$delta] = array(
-      '#markup' => $duration,
+      '#markup' => duration_formatter_format($item['value']),
     );
   }
 
   return $element;
+}
+
+/**
+ * Format a number in seconds in a duration.
+ *
+ * @param int $value
+ *   The number of seconds.
+ *
+ * @return string
+ *   The duration string.
+ */
+function duration_formatter_format($value) {
+  $hours = intval(intval($value) / 3600);
+  $minutes = intval(($value / 60) % 60);
+  $seconds = intval($value % 60);
+
+  $duration = '';
+
+  if ($hours !== 0) {
+    $duration = str_pad($hours, 2, '0', STR_PAD_LEFT) . ':';
+  }
+
+  $duration .= str_pad($minutes, 2, '0', STR_PAD_LEFT) . ':';
+  $duration .= str_pad($seconds, 2, '0', STR_PAD_LEFT);
+  return $duration;
 }
